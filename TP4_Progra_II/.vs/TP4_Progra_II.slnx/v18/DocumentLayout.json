@@ -7,8 +7,8 @@
       "RelativeMoniker": "D:0:0:{29BB2E99-B754-4B9E-9C4A-97AD68FBF7D6}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\ejercicio1.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{29BB2E99-B754-4B9E-9C4A-97AD68FBF7D6}|WebApplication1\\WebApplication1.csproj|c:\\users\\mat\u00EDas\\desktop\\utn - programaci\u00F3n iii\\tp4\\tp4_progra_ii\\webapplication1\\ejercicio1.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{29BB2E99-B754-4B9E-9C4A-97AD68FBF7D6}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\ejercicio1.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{29BB2E99-B754-4B9E-9C4A-97AD68FBF7D6}|WebApplication1\\WebApplication1.csproj|c:\\users\\mat\u00EDas\\desktop\\utn - programaci\u00F3n iii\\tp4\\tp4_progra_ii\\webapplication1\\stylesheet1.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{29BB2E99-B754-4B9E-9C4A-97AD68FBF7D6}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\stylesheet1.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -40,14 +40,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Ejercicio1.aspx.cs",
-              "DocumentMoniker": "C:\\Users\\Mat\u00EDas\\Desktop\\UTN - Programaci\u00F3n III\\TP4\\TP4_Progra_II\\WebApplication1\\Ejercicio1.aspx.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Ejercicio1.aspx.cs",
-              "ToolTip": "C:\\Users\\Mat\u00EDas\\Desktop\\UTN - Programaci\u00F3n III\\TP4\\TP4_Progra_II\\WebApplication1\\Ejercicio1.aspx.cs",
-              "RelativeToolTip": "WebApplication1\\Ejercicio1.aspx.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-27T00:17:20.435Z",
+              "Title": "StyleSheet1.css",
+              "DocumentMoniker": "C:\\Users\\Mat\u00EDas\\Desktop\\UTN - Programaci\u00F3n III\\TP4\\TP4_Progra_II\\WebApplication1\\StyleSheet1.css",
+              "RelativeDocumentMoniker": "WebApplication1\\StyleSheet1.css",
+              "ToolTip": "C:\\Users\\Mat\u00EDas\\Desktop\\UTN - Programaci\u00F3n III\\TP4\\TP4_Progra_II\\WebApplication1\\StyleSheet1.css",
+              "RelativeToolTip": "WebApplication1\\StyleSheet1.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-04-27T01:27:52.118Z",
               "EditorCaption": ""
             }
           ]
