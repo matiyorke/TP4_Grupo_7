@@ -2,9 +2,9 @@
     background-color: #398CF6;      /* color de fondo de la página, celeste*/
     font-family: Arial, sans-serif; /* formato de la tipografía*/
     display: flex;                  /* activa Flexbox para alinear elementos hijos */
-    justify-content: center;        /* centra horizontalmente */
+    justify-content: center;          /* centra horizontalmente */
     align-items: center;            /* centra verticalmente*/
-    min-height: 100vh;              /* el body ocupa al menos el 100% 
+    min-height: 50vh;              /* el body ocupa al menos el 50% 
                                     de la altura de la pantalla (Viewport Height)*/
 }
 
