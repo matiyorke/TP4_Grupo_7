@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace WebApplication1
 {
@@ -28,13 +29,20 @@ namespace WebApplication1
 
                 SqlCommand comando = new SqlCommand(consultaSQL , conexion);
                 SqlDataReader lector = comando.ExecuteReader();
-
+                DataTable tabla = new DataTable();// Creamos tabla, aca se van a guardar los datos que lea SqlDataReader y los almacene en lector
+                tabla.Load(lector);//Lo que contenga lector lo guaradmos en memoria
                 //guardar datos en el control ddlProvincia1
 
-                ddlProvincia1.DataSource = lector;
+                ddlProvincia1.DataSource = tabla;
                 ddlProvincia1.DataTextField = "NombreProvincia";
                 ddlProvincia1.DataValueField = "IdProvincia";
                 ddlProvincia1.DataBind(); 
+
+                //guardar datos en el control ddlProvincia2
+                ddlProvincia2.DataSource = tabla;
+                ddlProvincia2.DataTextField = "NombreProvincia";
+                ddlProvincia2.DataValueField = "IdProvincia";
+                ddlProvincia2.DataBind();
 
                 conexion.Close(); 
             }
