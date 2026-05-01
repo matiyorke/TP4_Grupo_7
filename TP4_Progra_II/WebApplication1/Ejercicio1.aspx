@@ -37,7 +37,7 @@
         <br />
         <asp:Label ID="lblLocalidad2" runat="server" Font-Bold="True" Text="LOCALIDAD:"></asp:Label>
 &nbsp;&nbsp;&nbsp;
-        <asp:DropDownList ID="ddlLocalidad2" runat="server">
+        <asp:DropDownList ID="ddlLocalidad2" runat="server" AutoPostBack="True">
         </asp:DropDownList>
        </div>
     </form>

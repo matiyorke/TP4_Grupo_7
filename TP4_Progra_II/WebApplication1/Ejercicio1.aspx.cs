@@ -66,7 +66,7 @@ namespace WebApplication1
             SqlDataReader lector = comando.ExecuteReader();
 
             ddl.Items.Clear();
-            ddl.Items.Add(new ListItem("--Seleccionar--", "0"));
+            //ddl.Items.Add(new ListItem("--Seleccionar--", "0"));
             ddl.DataSource = lector;
             ddl.DataTextField = "NombreLocalidad";
             ddl.DataValueField = "IdLocalidad";
@@ -75,14 +75,34 @@ namespace WebApplication1
             conexion.Close();
         }
 
+        private void FiltrarProvincia(DropDownList ddl, string idExcluir) // este es como la otra funcion solo que excluimos la provincia seleccionada en el otro dropdown
+        {
+            SqlConnection conexion = new SqlConnection(cadenaConexion);
+            conexion.Open();
+
+            SqlCommand comando = new SqlCommand("SELECT * FROM Provincias WHERE IdProvincia != @id", conexion); // modificamos la consulta para excluir la provincia seleccionada
+            comando.Parameters.AddWithValue("@id", idExcluir); //el comando se puede simplificar si alguno quiere agarrar el aporte
+            SqlDataReader lector = comando.ExecuteReader();
+
+            ddl.Items.Clear();
+            ddl.DataSource = lector;
+            ddl.DataTextField = "NombreProvincia";
+            ddl.DataValueField = "IdProvincia";
+            ddl.DataBind();
+
+            conexion.Close();
+        }
+
         protected void ddlProvincia1_SelectedIndexChanged(object sender, EventArgs e)
         {
             CargarLocalidades(ddlLocalidad1, ddlProvincia1.SelectedValue);
+            FiltrarProvincia(ddlProvincia2, ddlProvincia1.SelectedValue);
         }
 
         protected void ddlProvincia2_SelectedIndexChanged(object sender, EventArgs e)
         {
                         CargarLocalidades(ddlLocalidad2, ddlProvincia2.SelectedValue);
+                        FiltrarProvincia(ddlProvincia1, ddlProvincia2.SelectedValue);
         }
     }
 }
