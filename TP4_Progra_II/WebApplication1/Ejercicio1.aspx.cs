@@ -46,6 +46,14 @@ namespace WebApplication1
 
                 conexion.Close(); 
             }
+            else
+            {
+                if (ddlProvincia1.SelectedValue != "0")
+                {
+                    CargarLocalidades(ddlLocalidad1, ddlProvincia1.SelectedValue);
+                }
+            }
+
         }
 
         private void CargarLocalidades(DropDownList ddl, string idProvincia)
@@ -70,6 +78,11 @@ namespace WebApplication1
         protected void ddlProvincia1_SelectedIndexChanged(object sender, EventArgs e)
         {
             CargarLocalidades(ddlLocalidad1, ddlProvincia1.SelectedValue);
+        }
+
+        protected void ddlProvincia2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+                        CargarLocalidades(ddlLocalidad2, ddlProvincia2.SelectedValue);
         }
     }
 }

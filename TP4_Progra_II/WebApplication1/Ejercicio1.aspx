@@ -32,7 +32,7 @@
         <br />
         <asp:Label ID="lblProvincia2" runat="server" Font-Bold="True" Text="PROVINCIA:"></asp:Label>
 &nbsp;&nbsp;&nbsp;
-        <asp:DropDownList ID="ddlProvincia2" runat="server">
+        <asp:DropDownList ID="ddlProvincia2" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlProvincia2_SelectedIndexChanged">
         </asp:DropDownList>
         <br />
         <asp:Label ID="lblLocalidad2" runat="server" Font-Bold="True" Text="LOCALIDAD:"></asp:Label>
