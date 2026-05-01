@@ -81,6 +81,8 @@ namespace WebApplication1
             conexion.Close();
         }
 
+
+
         private void FiltrarProvincia(DropDownList ddl, string idExcluir) // este es como la otra funcion solo que excluimos la provincia seleccionada en el otro dropdown
         {
             SqlConnection conexion = new SqlConnection(cadenaConexion);
@@ -98,6 +100,32 @@ namespace WebApplication1
 
             conexion.Close();
         }
+
+        /*
+        private void FiltrarProvincia(DropDownList ddl, string idExcluir)
+        {
+            SqlConnection conexion = new SqlConnection(cadenaConexion);
+            conexion.Open();
+
+            SqlDataAdapter adapter = new SqlDataAdapter(
+                "SELECT IdProvincia, NombreProvincia FROM Provincias WHERE IdProvincia <> " + idExcluir,
+                conexion
+            );
+
+            DataTable tabla = new DataTable();
+            adapter.Fill(tabla);
+
+            ddl.DataSource = tabla;
+            ddl.DataTextField = "NombreProvincia";
+            ddl.DataValueField = "IdProvincia";
+            ddl.DataBind();
+
+            conexion.Close();
+        }
+        */
+
+
+
 
         private void FiltrarProvincia_opcion2(DropDownList ddl, string idExcluir) //Con esta opcion evitamos llamar 2 veces a la base de datos
         {
