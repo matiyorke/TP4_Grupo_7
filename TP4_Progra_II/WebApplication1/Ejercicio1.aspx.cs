@@ -17,26 +17,27 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            if(!IsPostBack)
+
+            if (!IsPostBack)
             {
                 //establecer la conexión con la BD
 
                 SqlConnection conexion = new SqlConnection(cadenaConexion);
-                conexion.Open(); 
-                
+                conexion.Open();
+
                 //ejecutar la consulta SQL
 
-                SqlCommand comando = new SqlCommand(consultaSQL , conexion);
+                SqlCommand comando = new SqlCommand(consultaSQL, conexion);
                 SqlDataReader lector = comando.ExecuteReader();
                 DataTable tabla = new DataTable();// Creamos tabla, aca se van a guardar los datos que lea SqlDataReader y los almacene en lector
+                Session["TablaProvincias"] = tabla; //Guardamos en "session" para utilizar las veces q sea necesario
                 tabla.Load(lector);//Lo que contenga lector lo guaradmos en memoria
                 //guardar datos en el control ddlProvincia1
 
                 ddlProvincia1.DataSource = tabla;
                 ddlProvincia1.DataTextField = "NombreProvincia";
                 ddlProvincia1.DataValueField = "IdProvincia";
-                ddlProvincia1.DataBind(); 
+                ddlProvincia1.DataBind();
 
                 //guardar datos en el control ddlProvincia2
                 ddlProvincia2.DataSource = tabla;
@@ -44,7 +45,9 @@ namespace WebApplication1
                 ddlProvincia2.DataValueField = "IdProvincia";
                 ddlProvincia2.DataBind();
 
-                conexion.Close(); 
+                          
+
+        conexion.Close();
             }
             else
             {
@@ -52,7 +55,10 @@ namespace WebApplication1
                 {
                     CargarLocalidades(ddlLocalidad1, ddlProvincia1.SelectedValue);
                 }
+
             }
+              //Otra manera de filtrar provincia para que no se repitan en lugar de origen y destino
+             
 
         }
 
@@ -93,6 +99,18 @@ namespace WebApplication1
             conexion.Close();
         }
 
+        private void FiltrarProvincia_opcion2(DropDownList ddl, string idExcluir) //Con esta opcion evitamos llamar 2 veces a la base de datos
+        {
+            DataTable tabla = (DataTable)Session["TablaProvincias"];
+            DataView vista = new DataView(tabla); //Es la vista de la DataTable, nos permite utilizar diferentes metodos como .sort() .filter, etc
+            vista.RowFilter = "IdProvincia <>" + idExcluir;
+
+            ddl.DataSource = vista;
+            ddl.DataTextField = "NombreProvincia";
+            ddl.DataValueField = "IdProvincia";
+            ddl.DataBind();
+        }
+
         protected void ddlProvincia1_SelectedIndexChanged(object sender, EventArgs e)
         {
             CargarLocalidades(ddlLocalidad1, ddlProvincia1.SelectedValue);
@@ -101,8 +119,8 @@ namespace WebApplication1
 
         protected void ddlProvincia2_SelectedIndexChanged(object sender, EventArgs e)
         {
-                        CargarLocalidades(ddlLocalidad2, ddlProvincia2.SelectedValue);
-                        FiltrarProvincia(ddlProvincia1, ddlProvincia2.SelectedValue);
+            CargarLocalidades(ddlLocalidad2, ddlProvincia2.SelectedValue);
+            FiltrarProvincia(ddlProvincia1, ddlProvincia2.SelectedValue);
         }
     }
 }
