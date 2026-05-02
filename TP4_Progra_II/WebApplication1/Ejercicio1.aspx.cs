@@ -20,6 +20,7 @@ namespace WebApplication1
 
             if (!IsPostBack)
             {
+                
                 //establecer la conexión con la BD
 
                 SqlConnection conexion = new SqlConnection(cadenaConexion);
@@ -54,6 +55,8 @@ namespace WebApplication1
                 if (ddlProvincia1.SelectedValue != "0")
                 {
                     CargarLocalidades(ddlLocalidad1, ddlProvincia1.SelectedValue);
+
+        
                 }
 
             }
@@ -85,6 +88,8 @@ namespace WebApplication1
 
         private void FiltrarProvincia(DropDownList ddl, string idExcluir) // este es como la otra funcion solo que excluimos la provincia seleccionada en el otro dropdown
         {
+            string valorAnterior = ddl.SelectedValue; //guarda lo anterior
+
             SqlConnection conexion = new SqlConnection(cadenaConexion);
             conexion.Open();
 
@@ -97,6 +102,11 @@ namespace WebApplication1
             ddl.DataTextField = "NombreProvincia";
             ddl.DataValueField = "IdProvincia";
             ddl.DataBind();
+
+            if (ddl.Items.FindByValue(valorAnterior) != null) //si el valor anterior sigue existiendo en el nuevo dropdown, lo seleccionamos
+            {
+                ddl.SelectedValue = valorAnterior;
+            }
 
             conexion.Close();
         }
