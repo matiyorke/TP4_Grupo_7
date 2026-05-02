@@ -15,11 +15,14 @@
             padding-top: 150px;
             margin: 0;
             min-height: 100vh;
+            gap: 30px;
+            align-items: flex-start;
         }
 
         form {
             display: flex;
             justify-content: center;
+            gap: 30px;
             width: 100%;
         }
 
@@ -77,6 +80,32 @@
             border-top: 1px solid #f0c040;
             margin: 20px 0;
         }
+
+        /*[NUEVO] Estilo del panel de resumen a la derecha*/
+        .resumen-panel {
+            background-color: #2c5f8a;
+            border: 2px solid #f0c040;
+            border-radius: 14px;
+            padding: 40px 40px;
+            width: 280px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            height: fit-content;
+        }
+
+        .resumen-titulo {
+            color: #f0c040;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: underline;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .resumen-texto {
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -114,6 +143,13 @@
             </div>
 
        </div>
+
+       <%-- Panel de resumen a la derecha del cartel principal--%>
+       <div class="resumen-panel">
+           <span class="resumen-titulo">RESUMEN DEL VIAJE</span>
+           <asp:Label ID="lblResumen" runat="server" Visible="False" CssClass="resumen-texto"></asp:Label>
+       </div>
+
     </form>
 </body>
 </html>

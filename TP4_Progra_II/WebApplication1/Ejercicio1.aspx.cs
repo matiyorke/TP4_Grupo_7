@@ -17,52 +17,37 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (!IsPostBack)
             {
-                
-                //establecer la conexión con la BD
-
-                SqlConnection conexion = new SqlConnection(cadenaConexion);
-                conexion.Open();
-
-                //ejecutar la consulta SQL
-
-                SqlCommand comando = new SqlCommand(consultaSQL, conexion);
-                SqlDataReader lector = comando.ExecuteReader();
-                DataTable tabla = new DataTable();// Creamos tabla, aca se van a guardar los datos que lea SqlDataReader y los almacene en lector
-                Session["TablaProvincias"] = tabla; //Guardamos en "session" para utilizar las veces q sea necesario
-                tabla.Load(lector);//Lo que contenga lector lo guaradmos en memoria
-                //guardar datos en el control ddlProvincia1
+                // Se reemplaza SqlCommand + SqlDataReader + DataTable.Load por SqlDataAdapter, mas corto y prolijo
+                SqlDataAdapter adapter = new SqlDataAdapter(consultaSQL, cadenaConexion);
+                DataTable tabla = new DataTable();
+                adapter.Fill(tabla);
+                Session["TablaProvincias"] = tabla;
 
                 ddlProvincia1.DataSource = tabla;
                 ddlProvincia1.DataTextField = "NombreProvincia";
                 ddlProvincia1.DataValueField = "IdProvincia";
                 ddlProvincia1.DataBind();
 
-                //guardar datos en el control ddlProvincia2
                 ddlProvincia2.DataSource = tabla;
                 ddlProvincia2.DataTextField = "NombreProvincia";
                 ddlProvincia2.DataValueField = "IdProvincia";
                 ddlProvincia2.DataBind();
-
-                          
-
-        conexion.Close();
             }
             else
             {
                 if (ddlProvincia1.SelectedValue != "0")
                 {
                     CargarLocalidades(ddlLocalidad1, ddlProvincia1.SelectedValue);
-
-        
                 }
 
+                // Se agrega la carga de localidades para el destino 2 que faltaba
+                if (ddlProvincia2.SelectedValue != "0")
+                {
+                    CargarLocalidades(ddlLocalidad2, ddlProvincia2.SelectedValue);
+                }
             }
-              //Otra manera de filtrar provincia para que no se repitan en lugar de origen y destino
-             
-
         }
 
         private void CargarLocalidades(DropDownList ddl, string idProvincia)
@@ -84,17 +69,15 @@ namespace WebApplication1
             conexion.Close();
         }
 
-
-
-        private void FiltrarProvincia(DropDownList ddl, string idExcluir) // este es como la otra funcion solo que excluimos la provincia seleccionada en el otro dropdown
+        private void FiltrarProvincia(DropDownList ddl, string idExcluir)
         {
-            string valorAnterior = ddl.SelectedValue; //guarda lo anterior
+            string valorAnterior = ddl.SelectedValue;
 
             SqlConnection conexion = new SqlConnection(cadenaConexion);
             conexion.Open();
 
-            SqlCommand comando = new SqlCommand("SELECT * FROM Provincias WHERE IdProvincia != @id", conexion); // modificamos la consulta para excluir la provincia seleccionada
-            comando.Parameters.AddWithValue("@id", idExcluir); //el comando se puede simplificar si alguno quiere agarrar el aporte
+            SqlCommand comando = new SqlCommand("SELECT * FROM Provincias WHERE IdProvincia != @id", conexion);
+            comando.Parameters.AddWithValue("@id", idExcluir);
             SqlDataReader lector = comando.ExecuteReader();
 
             ddl.Items.Clear();
@@ -103,7 +86,7 @@ namespace WebApplication1
             ddl.DataValueField = "IdProvincia";
             ddl.DataBind();
 
-            if (ddl.Items.FindByValue(valorAnterior) != null) //si el valor anterior sigue existiendo en el nuevo dropdown, lo seleccionamos
+            if (ddl.Items.FindByValue(valorAnterior) != null)
             {
                 ddl.SelectedValue = valorAnterior;
             }
@@ -134,13 +117,10 @@ namespace WebApplication1
         }
         */
 
-
-
-
-        private void FiltrarProvincia_opcion2(DropDownList ddl, string idExcluir) //Con esta opcion evitamos llamar 2 veces a la base de datos
+        private void FiltrarProvincia_opcion2(DropDownList ddl, string idExcluir)
         {
             DataTable tabla = (DataTable)Session["TablaProvincias"];
-            DataView vista = new DataView(tabla); //Es la vista de la DataTable, nos permite utilizar diferentes metodos como .sort() .filter, etc
+            DataView vista = new DataView(tabla);
             vista.RowFilter = "IdProvincia <>" + idExcluir;
 
             ddl.DataSource = vista;
@@ -153,12 +133,31 @@ namespace WebApplication1
         {
             CargarLocalidades(ddlLocalidad1, ddlProvincia1.SelectedValue);
             FiltrarProvincia(ddlProvincia2, ddlProvincia1.SelectedValue);
+            // Muestra resumen del viaje cuando se seleccionan ambas localidades
+            MostrarResumen();
         }
 
         protected void ddlProvincia2_SelectedIndexChanged(object sender, EventArgs e)
         {
             CargarLocalidades(ddlLocalidad2, ddlProvincia2.SelectedValue);
             FiltrarProvincia(ddlProvincia1, ddlProvincia2.SelectedValue);
+            // Muestra resumen del viaje cuando se seleccionan ambas localidades
+            MostrarResumen();
+        }
+
+        // Método que muestra el resumen del viaje si ambas provincias y localidades están seleccionadas
+        private void MostrarResumen()
+        {
+            if (ddlLocalidad1.Items.Count > 0 && ddlLocalidad2.Items.Count > 0)
+            {
+                lblResumen.Text = "Viaje: " + ddlLocalidad1.SelectedItem.Text + " (" + ddlProvincia1.SelectedItem.Text + ") → " +
+                                  ddlLocalidad2.SelectedItem.Text + " (" + ddlProvincia2.SelectedItem.Text + ")";
+                lblResumen.Visible = true;
+            }
+            else
+            {
+                lblResumen.Visible = false;
+            }
         }
     }
 }
