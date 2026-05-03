@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Data;
+using System.Reflection.Emit;
 
 namespace WebApplication1
 {
@@ -13,22 +14,26 @@ namespace WebApplication1
     {
         private const string CadenaConexion = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=Libreria;Integrated Security=True";
         
-        private const string ConsultaSQL = "SELECT * FROM Libros";
+        private const string ConsultaSQL = "SELECT * FROM Libros WHERE IdTema = @Tema";
 
         protected void Page_Load(object sender, EventArgs e)
         {
+          
+
             if (!IsPostBack)
             {
+                int tema = Convert.ToInt32(Session["TemaSeleccionado"]);
+
                 SqlConnection conexion = new SqlConnection(CadenaConexion);
                 conexion.Open();
 
+                SqlCommand comando = new SqlCommand(ConsultaSQL, conexion);
+                comando.Parameters.AddWithValue("@Tema", tema);
 
-
-                SqlDataAdapter adapter = new SqlDataAdapter(ConsultaSQL, conexion);
+                SqlDataAdapter adapter = new SqlDataAdapter(comando);
                 DataTable tabla = new DataTable();
                 adapter.Fill(tabla);
 
-                // ejemplo para mostrar los datos
                 GridView1.DataSource = tabla;
                 GridView1.DataBind();
 
