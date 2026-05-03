@@ -39,24 +39,61 @@ namespace WebApplication1
             conn.Close();
         }
 
-        // Botón Filtrar (solo caso IdProducto)
 
         protected void btnFiltrar_Click1(object sender, EventArgs e)
         {
-            if (txtProducto.Text != "" && txtCategoria.Text == "")
+
+            if (txtCategoria.Text == "" && txtProducto.Text == "")
             {
+
+            }
+            else
+            {
+
                 SqlConnection conn = new SqlConnection(rutaNeptunoSQL);
                 conn.Open();
 
                 string[] ops = { "=", ">", "<" };
-                string operador = ops[int.Parse(DropDownList1.SelectedValue)];
+                string operadorP = ops[int.Parse(DropDownList1.SelectedValue)]; //operador en producto
+                string operadorC = ops[int.Parse(DropDownList2.SelectedValue)]; //operador en categoría
+                bool productoF = txtProducto.Text != "";  //tiene producto o no
+                bool categoriaF = txtCategoria.Text != "";  //tiene categoría o no
+                string consulta = "";
 
-                string consulta = "SELECT * FROM Productos WHERE IdProducto " + operador + " @id";
+                //caso completo//
+                if (productoF && categoriaF)
+                {
+                    consulta = "SELECT * FROM Productos WHERE IdProducto " + operadorP + " @id AND IdCategoría " + operadorC + " @cat";
+                }
+                //caso categoria/
+                else if (!productoF && categoriaF)
+                {
+
+                    consulta = "SELECT * FROM Productos WHERE IdCategoría " + operadorC + " @cat";   //busquen si hay tilde en el nombre de la columna//
+
+                }
+                //caso producto//
+                else if (productoF && !categoriaF)
+                {
+                    consulta = "SELECT * FROM Productos WHERE IdProducto " + operadorP + " @id";
+                }
+
 
                 SqlCommand cmd = new SqlCommand(consulta, conn);
 
                 // Convertir a número
-                cmd.Parameters.AddWithValue("@id", int.Parse(txtProducto.Text));
+                if (categoriaF)
+                {
+                    cmd.Parameters.AddWithValue("@cat", int.Parse(txtCategoria.Text));
+                }
+                if (productoF)
+                {
+                    cmd.Parameters.AddWithValue("@id", int.Parse(txtProducto.Text));
+
+                }
+
+
+
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -69,9 +106,7 @@ namespace WebApplication1
                 conn.Close();
             }
         }
-
-
-
     }
-
 }
+
+    
