@@ -52,7 +52,7 @@ namespace WebApplication1
         protected void btnFiltrar_Click1(object sender, EventArgs e)
         {
 
-            if (txtCategoria.Text == "" && txtProducto.Text == "")
+            if (txtCategoria.Text == "" && txtProducto.Text == "" && txtProveedor.Text == "")
             {
 
             }
@@ -65,8 +65,10 @@ namespace WebApplication1
                 string[] ops = { "=", ">", "<" };
                 string operadorP = ops[int.Parse(DropDownList1.SelectedValue)]; //operador en producto
                 string operadorC = ops[int.Parse(DropDownList2.SelectedValue)]; //operador en categoría
+                string operadorProv = ops[int.Parse(DropDownList3.SelectedValue)]; //operador en proveedor
                 bool productoF = txtProducto.Text != "";  //tiene producto o no
                 bool categoriaF = txtCategoria.Text != "";  //tiene categoría o no
+                bool proveedorF = txtProveedor.Text != "";  //tiene proveedor o no
                                                             //string consulta = "";
 
 
@@ -110,26 +112,42 @@ namespace WebApplication1
                 DataView dv = new DataView(dt); //Cargamos en DataView lo que esta en la DataTable
 
                 string filtro = ""; //Creamos un query dinamico
+
                 if (productoF)
                 {
                     filtro += $"IdProducto {operadorP} {txtProducto.Text}"; //Si hay producto se agrega
                 }
                 if (categoriaF)
+
                 {
-                    if(filtro != "")
-                    {
-                        filtro += " AND "; //Si hay producto y catergoria, agrega un AND para conectar
-                    }
-                    filtro += $"IdCategoría {operadorC} {txtCategoria.Text}"; //Agrega despues del AND para completar la consulta
+                    filtro += (filtro != "" ? " AND" : "") + $" IdCategoría {operadorC} {txtCategoria.Text}"; //Agrega despues del AND para completar la consulta
                 }
-                //Aplicamos el filtro
-                dv.RowFilter = filtro;
+                if (proveedorF)
+                {
+                    filtro += (filtro != "" ? " AND" : "") + $" IdProveedor {operadorProv} {txtProveedor.Text}";
+                } 
+
+                    //if (productoF)
+                    //{
+                    //    filtro += $"IdProducto {operadorP} {txtProducto.Text}"; //Si hay producto se agrega
+                    //}
+                    //if (categoriaF)
+                    //{
+                    //    if(filtro != "")
+                    //    {
+                    //        filtro += " AND "; //Si hay producto y catergoria, agrega un AND para conectar
+                    //    }
+                    //    filtro += $"IdCategoría {operadorC} {txtCategoria.Text}"; //Agrega despues del AND para completar la consulta
+                    //}
+
+                    dv.RowFilter = filtro;
                 //bindeamos
                 gvProdCat.DataSource = dv;
                 gvProdCat.DataBind();
 
                 txtProducto.Text = ""; // limpiamos los campos
                 txtCategoria.Text = "";
+                txtProveedor.Text = "";
 
                 lblResultados.Text = "Resultados encontrados: " + dv.Count; // mostramos el número de resultados encontrados
 
@@ -139,8 +157,10 @@ namespace WebApplication1
 
         protected void btnQuitar_Click(object sender, EventArgs e)
         {
+            lblResultados.Text = "";
             txtProducto.Text = "";
             txtCategoria.Text = "";
+            txtProveedor.Text = "";
             CargarGrid();
         }
     }

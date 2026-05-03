@@ -27,6 +27,15 @@
 &nbsp;&nbsp;&nbsp;
             <asp:TextBox ID="txtCategoria" runat="server"></asp:TextBox>
             <br />
+            IdProveedor:&nbsp;&nbsp;&nbsp;&nbsp; <asp:DropDownList ID="DropDownList3" runat="server">
+                <asp:ListItem Value="0">Igual a:</asp:ListItem>
+                <asp:ListItem Value="1">Mayor a:</asp:ListItem>
+                <asp:ListItem Value="2">Menor a:</asp:ListItem>
+            </asp:DropDownList>
+&nbsp;&nbsp;&nbsp;
+            <asp:TextBox ID="txtProveedor" runat="server"></asp:TextBox>
+            <br />
+            <br />
             <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Button ID="btnFiltrar" runat="server" Text="Filtrar" OnClick="btnFiltrar_Click1" />
