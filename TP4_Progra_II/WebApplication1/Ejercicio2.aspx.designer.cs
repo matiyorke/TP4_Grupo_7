@@ -78,6 +78,15 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Button btnQuitar;
 
         /// <summary>
+        /// Control lblResultados.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblResultados;
+
+        /// <summary>
         /// Control gvProdCat.
         /// </summary>
         /// <remarks>

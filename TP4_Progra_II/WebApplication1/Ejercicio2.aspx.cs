@@ -103,8 +103,20 @@ namespace WebApplication1
                 gvProdCat.DataSource = dt;
                 gvProdCat.DataBind();
 
+                txtProducto.Text = ""; // limpiamos los campos
+                txtCategoria.Text = "";
+
+                lblResultados.Text = "Resultados encontrados: " + dt.Rows.Count; // mostramos el número de resultados encontrados
+
                 conn.Close();
             }
+        }
+
+        protected void btnQuitar_Click(object sender, EventArgs e)
+        {
+            txtProducto.Text = "";
+            txtCategoria.Text = "";
+            CargarGrid();
         }
     }
 }
