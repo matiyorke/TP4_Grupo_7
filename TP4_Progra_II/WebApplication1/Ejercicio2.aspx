@@ -41,7 +41,8 @@
             <asp:Button ID="btnFiltrar" runat="server" Text="Filtrar" OnClick="btnFiltrar_Click1" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Button ID="btnQuitar" runat="server" Text="Quitar Filtro" OnClick="btnQuitar_Click" />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;<asp:Label ID="lblError" runat="server" Font-Italic="True" ForeColor="#333333"></asp:Label>
+            &nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Label ID="lblResultados" runat="server"></asp:Label>
             <br />
             <br />

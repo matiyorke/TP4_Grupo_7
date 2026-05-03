@@ -54,10 +54,21 @@ namespace WebApplication1
 
             if (txtCategoria.Text == "" && txtProducto.Text == "" && txtProveedor.Text == "")
             {
-
+               
             }
             else
             {
+                if (!(int.TryParse(txtCategoria.Text, out _)) || !(int.TryParse(txtProducto.Text, out _)) 
+                || !(int.TryParse(txtProveedor.Text, out _)))
+                {
+                    lblError.Text = "Todos los campos a filtrar deben contener números.";
+                    txtCategoria.Text = string.Empty;
+                    txtProducto.Text = string.Empty;
+                    txtProveedor.Text = string.Empty;
+                    return;
+                }
+
+                lblError.Text = string.Empty;
 
                 /*SqlConnection conn = new SqlConnection(rutaNeptunoSQL);
                 conn.Open();*/
@@ -157,6 +168,7 @@ namespace WebApplication1
 
         protected void btnQuitar_Click(object sender, EventArgs e)
         {
+            lblError.Text = string.Empty;
             lblResultados.Text = "";
             txtProducto.Text = "";
             txtCategoria.Text = "";
