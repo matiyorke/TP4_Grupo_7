@@ -29,11 +29,19 @@ namespace WebApplication1
                 ddlProvincia1.DataTextField = "NombreProvincia";
                 ddlProvincia1.DataValueField = "IdProvincia";
                 ddlProvincia1.DataBind();
+                
 
                 ddlProvincia2.DataSource = tabla;
                 ddlProvincia2.DataTextField = "NombreProvincia";
                 ddlProvincia2.DataValueField = "IdProvincia";
                 ddlProvincia2.DataBind();
+
+                FiltrarProvincia(ddlProvincia2, ddlProvincia1.SelectedValue);
+                FiltrarProvincia(ddlProvincia1, ddlProvincia2.SelectedValue);
+                CargarLocalidades(ddlLocalidad2, ddlProvincia2.SelectedValue);
+                CargarLocalidades(ddlLocalidad1, ddlProvincia1.SelectedValue);
+         
+                MostrarResumen();
             }
             else
             {
