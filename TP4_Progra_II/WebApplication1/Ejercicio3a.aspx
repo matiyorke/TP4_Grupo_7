@@ -10,7 +10,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div  id class= "contenedor">  Seleccionar Tema:&nbsp;&nbsp;&nbsp;
+        <div class= "contenedor">  Seleccionar Tema:&nbsp;&nbsp;&nbsp;
             <asp:DropDownList ID="ddlTemas" runat="server">
                 <asp:ListItem Value="1">Tema 1</asp:ListItem>
                 <asp:ListItem Value="2">Tema 2</asp:ListItem>
@@ -24,7 +24,7 @@
                 <asp:ListItem Value="DESC">Descendente</asp:ListItem>
             </asp:DropDownList>
             <br />
-            <asp:LinkButton ID="lbVerLibros" runat="server" OnClick="lbVerLibros_Click">Ver libros</asp:LinkButton>
+            <asp:LinkButton ID="lbVerLibros" runat="server" OnClick="lbVerLibros_Click" CssClass="btnVerLibros">Ver libros</asp:LinkButton>
         </div>
     </form>
 </body>

@@ -10,12 +10,12 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div id class= "contenedor">
+        <div class= "contenedor">
             <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
             <asp:GridView ID="GridView1" runat="server">
             </asp:GridView>
             <br />
-            <asp:LinkButton ID="libVolver" runat="server" OnClick="libVolver_Click">Colsultar otro tema</asp:LinkButton>
+            <asp:LinkButton ID="libVolver" runat="server" OnClick="libVolver_Click" CssClass="btnVolver">Colsultar otro tema</asp:LinkButton>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Label ID="lblTotal" runat="server" Text="Label"></asp:Label>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

@@ -115,3 +115,11 @@ select {
     font-size: 14px;
     font-weight: bold;
 }
+
+.btnVolver {
+    color: #f0c040;
+}
+
+.btnVerLibros {
+    color: #f0c040;
+}
