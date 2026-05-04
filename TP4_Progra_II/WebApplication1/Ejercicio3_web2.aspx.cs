@@ -23,7 +23,7 @@ namespace WebApplication1
             if (!IsPostBack)
             {
                 int tema = Convert.ToInt32(Session["TemaSeleccionado"]);
-                string ordenPrecio = (Session["OrdenPrecio"]?.ToString()?? "ASC");
+                string ordenPrecio = (Session["OrdenPrecio"].ToString());
 
                 string consultaSQLFinal = ConsultaSQL + ordenPrecio;
 
