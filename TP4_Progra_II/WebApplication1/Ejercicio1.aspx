@@ -10,10 +10,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-       <div class="contenedor">  
-           <asp:Button ID="btnWF2EJ1" runat="server" OnClick="btnWF2EJ1_Click" Text="Ir al WebForm 2" />
-           <asp:Button ID="btnWF3EJ1" runat="server" OnClick="btnWF3EJ1_Click" Text="Ir al WebForm 3" />
-           <%--clase "contenedor" para todos los campos--%>
+       <div class="contenedor">  <%--clase "contenedor" para todos los campos--%>
 
             <div class="seccion">
                 <asp:Label ID="lblDestinoInicio" runat="server" CssClass="titulo-seccion" Font-Underline="True" Text="DESTINO INICIO:"></asp:Label>
@@ -43,6 +40,11 @@
                     <asp:Label ID="lblLocalidad2" runat="server" Font-Bold="True" Text="LOCALIDAD:"></asp:Label>
                     <asp:DropDownList ID="ddlLocalidad2" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlLocalidad2_SelectedIndexChanged"></asp:DropDownList>
                 </div>
+            </div>
+
+            <div class="botones">
+                <asp:Button ID="btnWF2EJ1" runat="server" OnClick="btnWF2EJ1_Click" Text="Ir al WebForm 2" CssClass="btn" />
+                <asp:Button ID="btnWF3EJ1" runat="server" OnClick="btnWF3EJ1_Click" Text="Ir al WebForm 3" CssClass="btn" />
             </div>
 
        </div>
