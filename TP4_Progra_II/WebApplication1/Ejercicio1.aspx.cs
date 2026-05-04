@@ -176,5 +176,15 @@ namespace WebApplication1
                 lblResumen.Visible = false;
             }
         }
+
+        protected void btnWF2EJ1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Ejercicio2.aspx");
+        }
+
+        protected void btnWF3EJ1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Ejercicio3_web2.aspx");
+        }
     }
 }

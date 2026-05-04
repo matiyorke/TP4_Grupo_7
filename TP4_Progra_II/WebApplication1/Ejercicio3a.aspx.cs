@@ -25,5 +25,15 @@ namespace WebApplication1
             Response.Redirect("~/Ejercicio3_web2.aspx");
             
         }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Ejercicio1.aspx");
+        }
+
+        protected void btnWF2EJ3_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Ejercicio2.aspx");
+        }
     }
 }

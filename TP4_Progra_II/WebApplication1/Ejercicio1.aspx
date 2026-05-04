@@ -10,7 +10,10 @@
 </head>
 <body>
     <form id="form1" runat="server">
-       <div class="contenedor">  <%--clase "contenedor" para todos los campos--%>
+       <div class="contenedor">  
+           <asp:Button ID="btnWF2EJ1" runat="server" OnClick="btnWF2EJ1_Click" Text="Ir al WebForm 2" />
+           <asp:Button ID="btnWF3EJ1" runat="server" OnClick="btnWF3EJ1_Click" Text="Ir al WebForm 3" />
+           <%--clase "contenedor" para todos los campos--%>
 
             <div class="seccion">
                 <asp:Label ID="lblDestinoInicio" runat="server" CssClass="titulo-seccion" Font-Underline="True" Text="DESTINO INICIO:"></asp:Label>

@@ -26,6 +26,10 @@
             <br />
             <asp:LinkButton ID="lbVerLibros" runat="server" OnClick="lbVerLibros_Click" CssClass="btnVerLibros">Ver libros</asp:LinkButton>
         </div>
+        <p>
+            <asp:Button ID="btnWF1EJ3" runat="server" OnClick="Button1_Click" Text="Ir al WebForm 1" />
+            <asp:Button ID="btnWF2EJ3" runat="server" OnClick="btnWF2EJ3_Click" Text="Ir al WebForm 2" />
+        </p>
     </form>
 </body>
 </html>
