@@ -22,6 +22,12 @@ namespace WebApplication1
 
             if (!IsPostBack)
             {
+                if (Session["TemaSeleccionado"] == null || Session["OrdenPrecio"] == null)
+                {
+                    Response.Redirect("Ejercicio3a.aspx");
+                    return;
+                }
+
                 int tema = Convert.ToInt32(Session["TemaSeleccionado"]);
                 string ordenPrecio = (Session["OrdenPrecio"].ToString());
 

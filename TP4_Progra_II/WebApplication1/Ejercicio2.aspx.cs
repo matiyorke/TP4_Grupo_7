@@ -198,7 +198,7 @@ namespace WebApplication1
         }
         protected void btnWF3EJ2_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Ejercicio3.aspx");
+            Response.Redirect("Ejercicio3_web2.aspx");
         }
 
     }
