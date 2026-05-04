@@ -58,17 +58,17 @@ namespace WebApplication1
             }
             else
             {
-                if (!(int.TryParse(txtCategoria.Text, out _)) || !(int.TryParse(txtProducto.Text, out _)) 
-                || !(int.TryParse(txtProveedor.Text, out _)))
-                {
-                    lblError.Text = "Todos los campos a filtrar deben contener números.";
-                    txtCategoria.Text = string.Empty;
-                    txtProducto.Text = string.Empty;
-                    txtProveedor.Text = string.Empty;
-                    return;
-                }
+                //if (!(int.TryParse(txtCategoria.Text, out _)) || !(int.TryParse(txtProducto.Text, out _)) 
+                //|| !(int.TryParse(txtProveedor.Text, out _)))
+                //{
+                //    lblError.Text = "Todos los campos a filtrar deben contener números.";
+                //    txtCategoria.Text = string.Empty;
+                //    txtProducto.Text = string.Empty;
+                //    txtProveedor.Text = string.Empty;
+                //    return;
+                //}
 
-                lblError.Text = string.Empty;
+                //lblError.Text = string.Empty;
 
                 /*SqlConnection conn = new SqlConnection(rutaNeptunoSQL);
                 conn.Open();*/
@@ -77,10 +77,12 @@ namespace WebApplication1
                 string operadorP = ops[int.Parse(DropDownList1.SelectedValue)]; //operador en producto
                 string operadorC = ops[int.Parse(DropDownList2.SelectedValue)]; //operador en categoría
                 string operadorProv = ops[int.Parse(DropDownList3.SelectedValue)]; //operador en proveedor
+                string operadorStock = ops[int.Parse(DropDownList4.SelectedValue)]; //operador en stock
                 bool productoF = txtProducto.Text != "";  //tiene producto o no
                 bool categoriaF = txtCategoria.Text != "";  //tiene categoría o no
                 bool proveedorF = txtProveedor.Text != "";  //tiene proveedor o no
                                                             //string consulta = "";
+                bool stockF = txtStock.Text != "";
 
 
                 //caso completo//
@@ -136,22 +138,27 @@ namespace WebApplication1
                 if (proveedorF)
                 {
                     filtro += (filtro != "" ? " AND" : "") + $" IdProveedor {operadorProv} {txtProveedor.Text}";
-                } 
+                }
 
-                    //if (productoF)
-                    //{
-                    //    filtro += $"IdProducto {operadorP} {txtProducto.Text}"; //Si hay producto se agrega
-                    //}
-                    //if (categoriaF)
-                    //{
-                    //    if(filtro != "")
-                    //    {
-                    //        filtro += " AND "; //Si hay producto y catergoria, agrega un AND para conectar
-                    //    }
-                    //    filtro += $"IdCategoría {operadorC} {txtCategoria.Text}"; //Agrega despues del AND para completar la consulta
-                    //}
+                if (stockF)
+                {
+                    filtro += (filtro != "" ? " AND" : "") + $" UnidadesEnExistencia {operadorStock} {txtStock.Text}";
+                }
 
-                    dv.RowFilter = filtro;
+                //if (productoF)
+                //{
+                //    filtro += $"IdProducto {operadorP} {txtProducto.Text}"; //Si hay producto se agrega
+                //}
+                //if (categoriaF)
+                //{
+                //    if(filtro != "")
+                //    {
+                //        filtro += " AND "; //Si hay producto y catergoria, agrega un AND para conectar
+                //    }
+                //    filtro += $"IdCategoría {operadorC} {txtCategoria.Text}"; //Agrega despues del AND para completar la consulta
+                //}
+
+                dv.RowFilter = filtro;
                 //bindeamos
                 gvProdCat.DataSource = dv;
                 gvProdCat.DataBind();
@@ -159,6 +166,7 @@ namespace WebApplication1
                 txtProducto.Text = ""; // limpiamos los campos
                 txtCategoria.Text = "";
                 txtProveedor.Text = "";
+                txtStock.Text = "";
 
                 lblResultados.Text = "Resultados encontrados: " + dv.Count; // mostramos el número de resultados encontrados
 
@@ -173,6 +181,7 @@ namespace WebApplication1
             txtProducto.Text = "";
             txtCategoria.Text = "";
             txtProveedor.Text = "";
+            txtStock.Text = "";
             CargarGrid();
         }
     }
