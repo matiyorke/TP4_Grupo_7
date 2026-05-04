@@ -52,7 +52,7 @@ namespace WebApplication1
         protected void btnFiltrar_Click1(object sender, EventArgs e)
         {
 
-            if (txtCategoria.Text == "" && txtProducto.Text == "" && txtProveedor.Text == "")
+            if (txtCategoria.Text == "" && txtProducto.Text == "" && txtProveedor.Text == "" && txtStock.Text == "")
             {
                 
                     gvProdCat.DataSource = Session["Productos"];
