@@ -56,7 +56,9 @@
             <br />
             <asp:GridView ID="gvProdCat" runat="server">
             </asp:GridView>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;<asp:Button ID="btnWF1EJ2" runat="server" OnClick="btnWF1EJ2_Click" Text="Ir a WebForm 1" />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="btnWF3EJ2" runat="server" OnClick="btnWF3EJ2_Click" Text="Ir a WebForm 3" />
+            &nbsp;&nbsp;&nbsp;
         </div>
     </form>
 </body>

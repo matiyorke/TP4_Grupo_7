@@ -191,6 +191,16 @@ namespace WebApplication1
             txtStock.Text = "";
             CargarGrid();
         }
+
+        protected void btnWF1EJ2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Ejercicio1.aspx");
+        }
+        protected void btnWF3EJ2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Ejercicio3.aspx");
+        }
+
     }
 }
 

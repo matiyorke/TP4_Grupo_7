@@ -72,6 +72,7 @@
     <Content Include="Ejercicio3a.aspx" />
     <Content Include="Ejercicio3_web2.aspx" />
     <Content Include="StyleSheet1.css" />
+    <Content Include="StyleSheet2.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
