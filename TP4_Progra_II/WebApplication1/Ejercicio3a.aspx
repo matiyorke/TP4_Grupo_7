@@ -17,6 +17,12 @@
                 <asp:ListItem Value="3">Tema 3</asp:ListItem>
             </asp:DropDownList>
             <br />
+            <asp:Label ID="lblPrecio" runat="server" Text="Ordenar por precio:"></asp:Label>
+&nbsp;
+            <asp:DropDownList ID="ddlPrecio" runat="server">
+                <asp:ListItem Value="ASC">Ascendente</asp:ListItem>
+                <asp:ListItem Value="DESC">Descendente</asp:ListItem>
+            </asp:DropDownList>
             <br />
             <asp:LinkButton ID="lbVerLibros" runat="server" OnClick="lbVerLibros_Click">Ver libros</asp:LinkButton>
         </div>

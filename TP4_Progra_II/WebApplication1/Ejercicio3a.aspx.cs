@@ -21,7 +21,9 @@ namespace WebApplication1
         protected void lbVerLibros_Click(object sender, EventArgs e)
         {
             Session["TemaSeleccionado"] = ddlTemas.SelectedValue; // Guardamos el tema seleccionado ej (1,2,3)
+            Session["OrdenPrecio"] = ddlPrecio.SelectedValue; // Guardamos orden descendente o ascendente.
             Response.Redirect("~/Ejercicio3_web2.aspx");
+            
         }
     }
 }

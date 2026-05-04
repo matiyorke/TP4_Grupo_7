@@ -14,7 +14,7 @@ namespace WebApplication1
     {
         private const string CadenaConexion = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=Libreria;Integrated Security=True";
 
-        private const string ConsultaSQL = "SELECT * FROM Libros WHERE IdTema = @Tema";
+        private const string ConsultaSQL = "SELECT * FROM Libros WHERE IdTema = @Tema ORDER BY Precio ";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,11 +23,14 @@ namespace WebApplication1
             if (!IsPostBack)
             {
                 int tema = Convert.ToInt32(Session["TemaSeleccionado"]);
+                string ordenPrecio = (Session["OrdenPrecio"]?.ToString()?? "ASC");
+
+                string consultaSQLFinal = ConsultaSQL + ordenPrecio;
 
                 SqlConnection conexion = new SqlConnection(CadenaConexion);
                 conexion.Open();
 
-                SqlCommand comando = new SqlCommand(ConsultaSQL, conexion);
+                SqlCommand comando = new SqlCommand(consultaSQLFinal, conexion);
                 comando.Parameters.AddWithValue("@Tema", tema);
 
                 SqlDataAdapter adapter = new SqlDataAdapter(comando);
