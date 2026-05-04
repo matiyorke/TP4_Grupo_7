@@ -41,6 +41,11 @@ namespace WebApplication1
 
                 conexion.Close();
             }
-        }    
+        }
+
+        protected void libVolver_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Ejercicio3a.aspx");
+        }
     }
 }
