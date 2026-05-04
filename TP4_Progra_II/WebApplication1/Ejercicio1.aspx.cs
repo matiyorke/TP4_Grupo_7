@@ -19,7 +19,6 @@ namespace WebApplication1
         {
             if (!IsPostBack)
             {
-                // Se reemplaza SqlCommand + SqlDataReader + DataTable.Load por SqlDataAdapter, mas corto y prolijo
                 SqlDataAdapter adapter = new SqlDataAdapter(consultaSQL, cadenaConexion);
                 DataTable tabla = new DataTable();
                 adapter.Fill(tabla);
@@ -29,7 +28,6 @@ namespace WebApplication1
                 ddlProvincia1.DataTextField = "NombreProvincia";
                 ddlProvincia1.DataValueField = "IdProvincia";
                 ddlProvincia1.DataBind();
-                
 
                 ddlProvincia2.DataSource = tabla;
                 ddlProvincia2.DataTextField = "NombreProvincia";
@@ -40,8 +38,6 @@ namespace WebApplication1
                 FiltrarProvincia(ddlProvincia1, ddlProvincia2.SelectedValue);
                 CargarLocalidades(ddlLocalidad2, ddlProvincia2.SelectedValue);
                 CargarLocalidades(ddlLocalidad1, ddlProvincia1.SelectedValue);
-         
-                MostrarResumen();
             }
             else
             {
@@ -50,7 +46,6 @@ namespace WebApplication1
                     CargarLocalidades(ddlLocalidad1, ddlProvincia1.SelectedValue);
                 }
 
-                // Se agrega la carga de localidades para el destino 2 que faltaba
                 if (ddlProvincia2.SelectedValue != "0")
                 {
                     CargarLocalidades(ddlLocalidad2, ddlProvincia2.SelectedValue);
@@ -60,6 +55,8 @@ namespace WebApplication1
 
         private void CargarLocalidades(DropDownList ddl, string idProvincia)
         {
+            string valorAnterior = ddl.SelectedValue;
+
             SqlConnection conexion = new SqlConnection(cadenaConexion);
             conexion.Open();
 
@@ -73,6 +70,11 @@ namespace WebApplication1
             ddl.DataTextField = "NombreLocalidad";
             ddl.DataValueField = "IdLocalidad";
             ddl.DataBind();
+
+            if (ddl.Items.FindByValue(valorAnterior) != null)
+            {
+                ddl.SelectedValue = valorAnterior;
+            }
 
             conexion.Close();
         }
@@ -141,7 +143,6 @@ namespace WebApplication1
         {
             CargarLocalidades(ddlLocalidad1, ddlProvincia1.SelectedValue);
             FiltrarProvincia(ddlProvincia2, ddlProvincia1.SelectedValue);
-            // Muestra resumen del viaje cuando se seleccionan ambas localidades
             MostrarResumen();
         }
 
@@ -149,11 +150,19 @@ namespace WebApplication1
         {
             CargarLocalidades(ddlLocalidad2, ddlProvincia2.SelectedValue);
             FiltrarProvincia(ddlProvincia1, ddlProvincia2.SelectedValue);
-            // Muestra resumen del viaje cuando se seleccionan ambas localidades
             MostrarResumen();
         }
 
-        // Método que muestra el resumen del viaje si ambas provincias y localidades están seleccionadas
+        protected void ddlLocalidad1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MostrarResumen();
+        }
+
+        protected void ddlLocalidad2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MostrarResumen();
+        }
+
         private void MostrarResumen()
         {
             if (ddlLocalidad1.Items.Count > 0 && ddlLocalidad2.Items.Count > 0)
