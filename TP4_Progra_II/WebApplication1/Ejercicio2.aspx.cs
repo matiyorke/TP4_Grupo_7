@@ -54,7 +54,14 @@ namespace WebApplication1
 
             if (txtCategoria.Text == "" && txtProducto.Text == "" && txtProveedor.Text == "")
             {
-               
+                
+                    gvProdCat.DataSource = Session["Productos"];
+                    gvProdCat.DataBind();
+
+                    lblResultados.Text = "Mostrando todos los registros";
+                    return;
+                
+
             }
             else
             {
