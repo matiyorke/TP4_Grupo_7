@@ -13,12 +13,12 @@ namespace WebApplication1
     public partial class Ejercicio3_web2 : System.Web.UI.Page
     {
         private const string CadenaConexion = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=Libreria;Integrated Security=True";
-        
+
         private const string ConsultaSQL = "SELECT * FROM Libros WHERE IdTema = @Tema";
 
         protected void Page_Load(object sender, EventArgs e)
         {
-          
+
 
             if (!IsPostBack)
             {
@@ -36,6 +36,21 @@ namespace WebApplication1
 
                 GridView1.DataSource = tabla;
                 GridView1.DataBind();
+
+                //  Cantidad de libros
+                int cantidad = tabla.Rows.Count;
+
+                //  Total de precios
+                decimal totalPrecios = 0;
+
+                if (tabla.Rows.Count > 0)
+                {
+                    totalPrecios = Convert.ToDecimal(tabla.Compute("SUM(Precio)", ""));
+                }
+
+                //  Mostrar en labels
+                lblCantidad.Text = "Cantidad de libros: " + cantidad;
+                lblTotal.Text = "Total : $" + totalPrecios.ToString("0.00");
 
 
 
