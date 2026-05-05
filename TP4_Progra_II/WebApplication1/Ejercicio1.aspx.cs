@@ -127,17 +127,17 @@ namespace WebApplication1
         }
         */
 
-        private void FiltrarProvincia_opcion2(DropDownList ddl, string idExcluir)
-        {
-            DataTable tabla = (DataTable)Session["TablaProvincias"];
-            DataView vista = new DataView(tabla);
-            vista.RowFilter = "IdProvincia <>" + idExcluir;
+        //private void FiltrarProvincia_opcion2(DropDownList ddl, string idExcluir)
+        //{
+        //    DataTable tabla = (DataTable)Session["TablaProvincias"];
+        //    DataView vista = new DataView(tabla);
+        //    vista.RowFilter = "IdProvincia <>" + idExcluir;
 
-            ddl.DataSource = vista;
-            ddl.DataTextField = "NombreProvincia";
-            ddl.DataValueField = "IdProvincia";
-            ddl.DataBind();
-        }
+        //    ddl.DataSource = vista;
+        //    ddl.DataTextField = "NombreProvincia";
+        //    ddl.DataValueField = "IdProvincia";
+        //    ddl.DataBind();
+        //}
 
         protected void ddlProvincia1_SelectedIndexChanged(object sender, EventArgs e)
         {
