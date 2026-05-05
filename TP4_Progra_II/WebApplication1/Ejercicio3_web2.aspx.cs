@@ -14,7 +14,7 @@ namespace WebApplication1
     {
         private const string CadenaConexion = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=Libreria;Integrated Security=True";
 
-        private const string ConsultaSQL = "SELECT * FROM Libros WHERE IdTema = @Tema ORDER BY Precio ";
+        private const string ConsultaSQL = "SELECT * FROM Libros WHERE IdTema = @Tema ";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -29,41 +29,54 @@ namespace WebApplication1
                 }
 
                 int tema = Convert.ToInt32(Session["TemaSeleccionado"]);
-                string ordenPrecio = (Session["OrdenPrecio"].ToString());
+                string ordenPrecio = Session["OrdenPrecio"].ToString();
 
-                string consultaSQLFinal = ConsultaSQL + ordenPrecio;
+                string ordenSQL = "";
 
-                SqlConnection conexion = new SqlConnection(CadenaConexion);
-                conexion.Open();
-
-                SqlCommand comando = new SqlCommand(consultaSQLFinal, conexion);
-                comando.Parameters.AddWithValue("@Tema", tema);
-
-                SqlDataAdapter adapter = new SqlDataAdapter(comando);
-                DataTable tabla = new DataTable();
-                adapter.Fill(tabla);
-
-                GridView1.DataSource = tabla;
-                GridView1.DataBind();
-
-                //  Cantidad de libros
-                int cantidad = tabla.Rows.Count;
-
-                //  Total de precios
-                decimal totalPrecios = 0;
-
-                if (tabla.Rows.Count > 0)
+                if (ordenPrecio == "ASC")
                 {
-                    totalPrecios = Convert.ToDecimal(tabla.Compute("SUM(Precio)", ""));
+                    ordenSQL = " ORDER BY Precio ASC";
+                }
+                else if (ordenPrecio == "DESC")
+                {
+                    ordenSQL = " ORDER BY Precio DESC";
+                }
+                else
+                {
+                    ordenSQL = " ORDER BY Precio ASC"; // Por default
                 }
 
-                //  Mostrar en labels
-                lblCantidad.Text = "Cantidad de libros: " + cantidad;
-                lblTotal.Text = "Total : $" + totalPrecios.ToString("0.00");
+                string consultaSQLFinal = ConsultaSQL + " " + ordenSQL;
 
+                using (SqlConnection conexion = new SqlConnection(CadenaConexion))
+                {
+                    conexion.Open();
 
+                    SqlCommand comando = new SqlCommand(consultaSQLFinal, conexion);
+                    comando.Parameters.AddWithValue("@Tema", tema);
 
-                conexion.Close();
+                    SqlDataAdapter adapter = new SqlDataAdapter(comando);
+                    DataTable tabla = new DataTable();
+                    adapter.Fill(tabla);
+
+                    GridView1.DataSource = tabla;
+                    GridView1.DataBind();
+
+                    //  Cantidad de libros
+                    int cantidad = tabla.Rows.Count;
+
+                    //  Total de precios
+                    decimal totalPrecios = 0;
+
+                    if (tabla.Rows.Count > 0)
+                    {
+                        totalPrecios = Convert.ToDecimal(tabla.Compute("SUM(Precio)", ""));
+                    }
+
+                    //  Mostrar en labels
+                    lblCantidad.Text = "Cantidad de libros: " + cantidad;
+                    lblTotal.Text = "Total : $" + totalPrecios.ToString("0.00");
+                }
             }
         }
 
